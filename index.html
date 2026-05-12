@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maskuri &amp; Eli Anisa - Wedding Invitation</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Pinyon+Script&amp;family=Outfit:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+  html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #f8fafc;
+    color: #1e3a5f;
+    overflow-x: hidden;
+  }
+  .font-script { font-family: 'Pinyon Script', cursive; }
+  .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
+  .font-sans-modern { font-family: 'Outfit', sans-serif; }
+
+  /* Cover background */
+  .cover-bg {
+    background: 
+      radial-gradient(ellipse at top, rgba(10, 156, 214, 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(219, 234, 254, 0.521) 0%, transparent 50%),
+      linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+  }
+
+  .section-bg {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+  }
+  @keyframes floatReverse {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(-3deg); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes drawLine {
+    from { stroke-dashoffset: 1000; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+  .animate-float-reverse { animation: floatReverse 7s ease-in-out infinite; }
+  .animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  /* Cover specific */
+  #cover {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+  #cover.hidden-cover {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+  }
+
+  #main-content {
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s;
+  }
+  #main-content.visible {
+    opacity: 1;
+  }
+
+  /* Elegant divider */
+  .elegant-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #60a5fa;
+  }
+  .elegant-divider::before,
+  .elegant-divider::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    max-width: 80px;
+    background: linear-gradient(to right, transparent, #93c5fd, transparent);
+  }
+
+  /* Photo frame */
+  .photo-frame {
+    position: relative;
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.25);
+    border: 3px solid #ffffff;
+  }
+  .photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Gallery */
+  .gallery-item {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+  }
+  .gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px -12px rgba(30, 58, 138, 0.3);
+  }
+
+  /* Slider */
+  .slider-track {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Button elegance */
+  .btn-elegant {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  .btn-elegant::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-elegant:hover::before { left: 100%; }
+
+  /* Countdown boxes */
+  .count-box {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(147, 197, 253, 0.3);
+    box-shadow: 0 8px 32px rgba(30, 58, 138, 0.08);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f0f9ff; }
+  ::-webkit-scrollbar-thumb { background: #93c5fd; border-radius: 4px; }
+
+  /* Ornament SVG lines */
+  .ornament-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 3s ease forwards;
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(15, 23, 42, 0.7);
+  }
+
+  /* Music button */
+  .music-btn {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(147, 197, 253, 0.4);
+  }
+
+  /* Envelope animation */
+  @keyframes envelopeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .envelope-float { animation: envelopeFloat 3s ease-in-out infinite; }
+
+  /* Falling petals */
+  @keyframes fall {
+    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    100% { transform: translateY(110%) translateX(50px) rotate(360deg); opacity: 0; }
+  }
+  .petal {
+    position: absolute;
+    top: -20px;
+    animation: fall linear infinite;
+    pointer-events: none;
+  }
+
+  /* Tab active */
+  .tab-active {
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    color: white;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Gallery slider image */
+  .slider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Pulse dot */
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+  }
+  .pulse-dot { animation: pulseDot 2s infinite; }
+
+  /* Loading spinner */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .spinner {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full w-full"><!-- Hidden audio player -->
+  <audio id="bg-music" loop style="display:none;"><source src="/audio/AU2.mp3" type="audio/mpeg">
+  </audio><!-- ============ COVER PAGE ============ -->
+  <div id="cover" class="cover-bg w-full h-full flex items-center justify-center overflow-hidden"><!-- Floating petals -->
+   <div id="petals-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div><!-- Decorative ornaments -->
+   <div class="absolute top-0 left-0 w-48 md:w-64 opacity-60 animate-float-slow">
+    <svg viewbox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 20 Q50 10, 80 30 T150 40" stroke="#60a5fa" stroke-width="1" fill="none" class="ornament-line" /> <circle cx="30" cy="40" r="8" fill="#bfdbfe" opacity="0.6" /> <circle cx="60" cy="25" r="5" fill="#93c5fd" opacity="0.5" /> <g transform="translate(40, 50)">
+      <path d="M0 0 C5 -10, 15 -10, 20 0 C25 -10, 35 -10, 40 0 C35 10, 20 15, 20 20 C20 15, 5 10, 0 0 Z" fill="#dbeafe" opacity="0.7" />
+     </g> <g transform="translate(90, 30)">
+      <path d="M0 0 C3 -6, 9 -6, 12 0 C15 -6, 21 -6, 24 0 C21 6, 12 9, 12 12 C12 9, 3 6, 0 0 Z" fill="#bfdbfe" opacity="0.8" />
+     </g>
+    </svg>
+   </div>
+   <div class="absolute bottom-0 right-0 w-48 md:w-64 opacity-60 animate-float-reverse">
+    <svg viewbox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);"><path d="M20 180 Q50 170, 80 190 T150 180" stroke="#60a5fa" stroke-width="1" fill="none" class="ornament-line" /> <circle cx="30" cy="160" r="8" fill="#bfdbfe" opacity="0.6" /> <circle cx="60" cy="175" r="5" fill="#93c5fd" opacity="0.5" /> <g transform="translate(40, 130)">
+      <path d="M0 0 C5 -10, 15 -10, 20 0 C25 -10, 35 -10, 40 0 C35 10, 20 15, 20 20 C20 15, 5 10, 0 0 Z" fill="#dbeafe" opacity="0.7" />
+     </g> <g transform="translate(100, 150)">
+      <path d="M0 0 C3 -6, 9 -6, 12 0 C15 -6, 21 -6, 24 0 C21 6, 12 9, 12 12 C12 9, 3 6, 0 0 Z" fill="#bfdbfe" opacity="0.8" />
+     </g>
+    </svg>
+   </div>
+   <div class="relative z-10 text-center px-6 max-w-lg mx-auto"><!-- Top label -->
+    <div class="mb-6" style="animation: fadeInUp 1s ease 0.2s both;">
+     <p class="text-xs md:text-sm tracking-[0.4em] text-blue-600 uppercase font-light">The Wedding Of</p>
+     <div class="elegant-divider mt-4 mb-6 w-48 mx-auto"><i data-lucide="heart" class="w-3 h-3 text-blue-400" style="fill: currentColor;"></i>
+     </div>
+    </div><!-- Names -->
+    <h1 class="font-script text-6xl md:text-8xl text-blue-900 leading-none mb-2" style="animation: fadeInUp 1s ease 0.4s both;">Maskuri</h1>
+    <p class="font-serif-elegant italic text-2xl md:text-3xl text-blue-400 my-2" style="animation: fadeInUp 1s ease 0.6s both;">&amp;</p>
+    <h1 class="font-script text-6xl md:text-8xl text-blue-900 leading-none mb-8" style="animation: fadeInUp 1s ease 0.8s both;">Eli Anisa</h1><!-- Date -->
+    <div class="mb-8" style="animation: fadeInUp 1s ease 1s both;">
+     <div class="elegant-divider w-32 mx-auto mb-3"></div>
+     <p class="font-serif-elegant text-lg md:text-xl text-slate-600 tracking-widest">06 · JUNI · 2026</p>
+     <div class="elegant-divider w-32 mx-auto mt-3"></div>
+    </div><!-- Guest name -->
+    <div class="mb-8" style="animation: fadeInUp 1s ease 1.2s both;">
+     <p class="text-xs tracking-[0.3em] text-slate-500 uppercase mb-2">Kepada Yth.</p>
+     <p class="font-serif-elegant text-xl md:text-2xl text-blue-900" id="guest-display">Tamu Undangan</p>
+     <p class="text-xs text-slate-400 mt-1 italic">Mohon maaf apabila terdapat kesalahan penulisan nama</p>
+    </div><!-- Open button --> <button id="open-btn" class="btn-elegant group relative px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm tracking-widest uppercase font-light shadow-xl hover:shadow-2xl transition-all animate-pulse-glow" style="animation: fadeInUp 1s ease 1.4s both, pulseGlow 3s ease-in-out infinite 2s;"> <span class="flex items-center gap-3"> <i data-lucide="mail-open" class="w-4 h-4"></i> Buka Undangan </span> </button> <!-- Generate guest name (for host before sharing) -->
+    <div class="mt-8" style="animation: fadeInUp 1s ease 1.6s both;"><button id="toggle-generator" class="text-xs text-blue-500 hover:text-blue-700 underline tracking-wider"> ⚙ Atur Nama Tamu (untuk pengirim) </button>
+     <div id="generator-panel" class="hidden mt-4 p-4 bg-white/80 backdrop-blur rounded-2xl border border-blue-100 shadow-lg"><label for="guest-input" class="block text-xs text-slate-600 mb-2 text-left">Masukkan nama tamu:</label> <input id="guest-input" type="text" placeholder="Contoh: Bapak Ahmad &amp; Keluarga" class="w-full px-4 py-2 rounded-full border border-blue-200 focus:border-blue-500 focus:outline-none text-sm">
+      <div class="flex gap-2 mt-3"><button id="apply-guest" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-full text-xs hover:bg-blue-700 transition">Terapkan</button> <button id="copy-link" class="flex-1 px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-xs hover:bg-slate-200 transition">📋 Salin Link</button>
+      </div>
+      <p id="copy-feedback" class="text-xs text-green-600 mt-2 hidden">✓ Link berhasil disalin!</p>
+     </div>
+    </div>
+   </div>
+  </div><!-- ============ MAIN CONTENT ============ -->
+  <div id="main-content" class="w-full min-h-full relative"><!-- Music control --> <button id="music-toggle" class="music-btn fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"> <i data-lucide="music" class="w-5 h-5 text-blue-700"></i> </button> <!-- ============ HERO SECTION ============ -->
+   <section class="relative w-full overflow-hidden section-bg pt-16 pb-20 px-6"><!-- Background ornaments -->
+    <div class="absolute top-10 -left-10 w-40 opacity-30 animate-float-slow">
+     <svg viewbox="0 0 100 100">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#93c5fd" stroke-width="0.5" /><circle cx="50" cy="50" r="45" fill="none" stroke="#bfdbfe" stroke-width="0.5" />
+     </svg>
+    </div>
+    <div class="relative max-w-2xl mx-auto text-center">
+     <div class="reveal">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-4">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="elegant-divider w-40 mx-auto mb-6"><i data-lucide="heart" class="w-3 h-3 text-blue-400" style="fill: currentColor;"></i>
+      </div>
+      <p class="font-serif-elegant italic text-slate-600 leading-relaxed text-base md:text-lg px-4">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."</p>
+      <p class="text-xs text-blue-500 mt-3 tracking-widest">— QS. Ar-Rum : 21 —</p>
+     </div>
+     <div class="reveal reveal-delay-2 mt-20">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase">We Are Getting Married</p>
+      <h2 class="font-script text-5xl md:text-7xl text-blue-900 mt-4">The Wedding</h2>
+     </div>
+    </div>
+   </section><!-- ============ COUPLE SECTION ============ -->
+   <section class="relative w-full py-20 px-6 section-bg overflow-hidden">
+    <div class="max-w-4xl mx-auto"><!-- Groom -->
+     <div class="reveal flex flex-col items-center text-center mb-20">
+      <div class="photo-frame w-56 h-56 md:w-64 md:h-64 mb-8"><img src="/img/1.jpg" alt="Maskuri" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='linear-gradient(135deg, #dbeafe, #93c5fd)'; this.alt='Photo';">
+      </div>
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-2">The Groom</p>
+      <h3 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Maskuri</h3>
+      <div class="elegant-divider w-24 mb-4"></div>
+      <p class="font-serif-elegant text-slate-600 text-base md:text-lg italic leading-relaxed max-w-md">Putra dari<br><span class="text-blue-800 font-medium not-italic">Bapak Yusuf</span> &amp;<br><span class="text-blue-800 font-medium not-italic">Ibu Jamilah</span></p>
+     </div><!-- Connector -->
+     <div class="reveal flex items-center justify-center mb-20">
+      <div class="flex items-center gap-6">
+       <div class="h-px w-16 bg-gradient-to-r from-transparent to-blue-300"></div>
+       <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center shadow-lg animate-pulse-glow"><i data-lucide="heart" class="w-5 h-5 text-blue-700" style="fill: currentColor;"></i>
+       </div>
+       <div class="h-px w-16 bg-gradient-to-l from-transparent to-blue-300"></div>
+      </div>
+     </div><!-- Bride -->
+     <div class="reveal flex flex-col items-center text-center">
+      <div class="photo-frame w-56 h-56 md:w-64 md:h-64 mb-8"><img src="/img/2.jpg" alt="Eli Anisa" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='linear-gradient(135deg, #dbeafe, #93c5fd)'; this.alt='Photo';">
+      </div>
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-2">The Bride</p>
+      <h3 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Eli Anisa</h3>
+      <div class="elegant-divider w-24 mb-4"></div>
+      <p class="font-serif-elegant text-slate-600 text-base md:text-lg italic leading-relaxed max-w-md">Putri dari<br><span class="text-blue-800 font-medium not-italic">Bapak Kalil (Alm)</span> &amp;<br><span class="text-blue-800 font-medium not-italic">Ibu Kawes</span></p>
+     </div>
+    </div>
+   </section><!-- ============ SAVE THE DATE / COUNTDOWN ============ -->
+   <section class="relative w-full py-20 px-6 overflow-hidden" style="background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);">
+    <div class="max-w-2xl mx-auto text-center">
+     <div class="reveal">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Save The Date</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Counting Days</h2>
+      <div class="elegant-divider w-32 mx-auto mb-8"><i data-lucide="calendar-heart" class="w-4 h-4 text-blue-400"></i>
+      </div>
+     </div><!-- Date display -->
+     <div class="reveal reveal-delay-1 mb-10">
+      <div class="inline-flex items-center gap-6 md:gap-10 px-8 py-5 bg-white rounded-2xl shadow-lg border border-blue-100">
+       <div class="text-center">
+        <p class="text-xs uppercase tracking-wider text-slate-500">Sabtu</p>
+        <p class="font-serif-elegant text-2xl text-blue-900 font-medium">Juni</p>
+       </div>
+       <div class="w-px h-12 bg-blue-200"></div>
+       <div class="text-center">
+        <p class="font-serif-elegant text-5xl md:text-6xl font-light text-blue-900">06</p>
+       </div>
+       <div class="w-px h-12 bg-blue-200"></div>
+       <div class="text-center">
+        <p class="text-xs uppercase tracking-wider text-slate-500">Tahun</p>
+        <p class="font-serif-elegant text-2xl text-blue-900 font-medium">2026</p>
+       </div>
+      </div>
+     </div><!-- Countdown -->
+     <div class="reveal reveal-delay-2 grid grid-cols-4 gap-2 md:gap-4 mb-10">
+      <div class="count-box rounded-2xl p-4 md:p-6">
+       <p id="cd-days" class="font-serif-elegant text-3xl md:text-5xl text-blue-900 font-light">00</p>
+       <p class="text-[10px] md:text-xs uppercase tracking-widest text-slate-500 mt-1">Hari</p>
+      </div>
+      <div class="count-box rounded-2xl p-4 md:p-6">
+       <p id="cd-hours" class="font-serif-elegant text-3xl md:text-5xl text-blue-900 font-light">00</p>
+       <p class="text-[10px] md:text-xs uppercase tracking-widest text-slate-500 mt-1">Jam</p>
+      </div>
+      <div class="count-box rounded-2xl p-4 md:p-6">
+       <p id="cd-mins" class="font-serif-elegant text-3xl md:text-5xl text-blue-900 font-light">00</p>
+       <p class="text-[10px] md:text-xs uppercase tracking-widest text-slate-500 mt-1">Menit</p>
+      </div>
+      <div class="count-box rounded-2xl p-4 md:p-6">
+       <p id="cd-secs" class="font-serif-elegant text-3xl md:text-5xl text-blue-900 font-light">00</p>
+       <p class="text-[10px] md:text-xs uppercase tracking-widest text-slate-500 mt-1">Detik</p>
+      </div>
+     </div><!-- Save the date button -->
+     <div class="reveal reveal-delay-3"><button id="save-date-btn" class="btn-elegant inline-flex items-center gap-3 px-8 py-3 border-2 border-blue-600 text-blue-700 rounded-full text-sm tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all"> <i data-lucide="calendar-plus" class="w-4 h-4"></i> Simpan Tanggal </button>
+     </div>
+    </div>
+   </section><!-- ============ EVENT DETAILS ============ -->
+   <section class="relative w-full py-20 px-6 section-bg overflow-hidden">
+    <div class="max-w-3xl mx-auto">
+     <div class="reveal text-center mb-12">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">When &amp; Where</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Wedding Events</h2>
+      <div class="elegant-divider w-32 mx-auto"><i data-lucide="map-pin" class="w-4 h-4 text-blue-400"></i>
+      </div>
+     </div>
+     <div class="grid md:grid-cols-2 gap-6"><!-- Akad -->
+      <div class="reveal reveal-delay-1 bg-white rounded-3xl p-8 shadow-xl border border-blue-50 text-center">
+       <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mb-4"><i data-lucide="heart-handshake" class="w-7 h-7 text-blue-700"></i>
+       </div>
+       <h3 class="font-script text-4xl text-blue-900 mb-2">Akad Nikah</h3>
+       <div class="elegant-divider w-20 mx-auto mb-4"></div>
+       <p class="font-serif-elegant text-lg text-slate-700 mb-1">Sabtu, 06 Juni 2026</p>
+       <p class="text-sm text-slate-500 mb-3">Pukul 09.00 WIB — Selesai</p>
+       <p class="text-xs text-blue-600 tracking-wider uppercase">Prosesi Suci</p>
+      </div><!-- Resepsi -->
+      <div class="reveal reveal-delay-2 bg-white rounded-3xl p-8 shadow-xl border border-blue-50 text-center">
+       <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center mb-4"><i data-lucide="utensils" class="w-7 h-7 text-blue-700"></i>
+       </div>
+       <h3 class="font-script text-4xl text-blue-900 mb-2">Resepsi</h3>
+       <div class="elegant-divider w-20 mx-auto mb-4"></div>
+       <p class="font-serif-elegant text-lg text-slate-700 mb-1">Sabtu, 06 Juni 2026</p>
+       <p class="text-sm text-slate-500 mb-3">Pukul 11.00 WIB — Selesai</p>
+       <p class="text-xs text-blue-600 tracking-wider uppercase">Ramah Tamah</p>
+      </div>
+     </div><!-- Location -->
+     <div class="reveal reveal-delay-3 mt-10 bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 shadow-lg border border-blue-100 text-center"><i data-lucide="map-pin" class="w-10 h-10 text-blue-700 mx-auto mb-3"></i>
+      <h4 class="font-serif-elegant text-xl text-blue-900 mb-2">Lokasi Acara</h4>
+      <p class="text-slate-600 text-sm mb-6 max-w-md mx-auto">Kehadiran dan doa restu Bapak/Ibu/Saudara/i merupakan kehormatan bagi kami.</p><a href="https://maps.app.goo.gl/cituMK7xqCXnwRmq9" target="_blank" rel="noopener noreferrer" class="btn-elegant inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm tracking-widest uppercase shadow-lg hover:shadow-xl transition-all"> <i data-lucide="navigation" class="w-4 h-4"></i> Navigasi Lokasi </a>
+     </div>
+    </div>
+   </section><!-- ============ LOVE STORY ============ -->
+   <section class="relative w-full py-20 px-6 overflow-hidden" style="background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);">
+    <div class="max-w-2xl mx-auto">
+     <div class="reveal text-center mb-12">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Our Journey</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Love Story</h2>
+      <div class="elegant-divider w-32 mx-auto"><i data-lucide="book-heart" class="w-4 h-4 text-blue-400"></i>
+      </div>
+     </div>
+     <div class="space-y-8">
+      <div class="reveal reveal-delay-1 flex gap-5 items-start">
+       <div class="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg"><i data-lucide="sparkles" class="w-5 h-5"></i>
+       </div>
+       <div class="flex-1 bg-white rounded-2xl p-6 shadow-md border border-blue-50">
+        <p class="text-xs text-blue-500 tracking-widest uppercase mb-2">Perjumpaan</p>
+        <h4 class="font-serif-elegant text-xl text-blue-900 mb-2">Awal Bertemu</h4>
+        <p class="text-sm text-slate-600 leading-relaxed italic">Takdir mempertemukan dua hati di waktu yang tepat. Sebuah perjumpaan sederhana yang menjadi awal dari kisah yang indah, diiringi tawa dan cerita yang tak pernah habis.</p>
+       </div>
+      </div>
+      <div class="reveal reveal-delay-2 flex gap-5 items-start">
+       <div class="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg"><i data-lucide="heart" class="w-5 h-5" style="fill: currentColor;"></i>
+       </div>
+       <div class="flex-1 bg-white rounded-2xl p-6 shadow-md border border-blue-50">
+        <p class="text-xs text-blue-500 tracking-widest uppercase mb-2">Tumbuh Bersama</p>
+        <h4 class="font-serif-elegant text-xl text-blue-900 mb-2">Saling Mengenal</h4>
+        <p class="text-sm text-slate-600 leading-relaxed italic">Hari demi hari kami lewati dengan saling memahami, berbagi suka dan duka. Rasa sayang tumbuh dengan sendirinya, dari pertemanan menjadi cinta yang tulus dan dewasa.</p>
+       </div>
+      </div>
+      <div class="reveal reveal-delay-3 flex gap-5 items-start">
+       <div class="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white shadow-lg"><i data-lucide="gem" class="w-5 h-5"></i>
+       </div>
+       <div class="flex-1 bg-white rounded-2xl p-6 shadow-md border border-blue-50">
+        <p class="text-xs text-blue-500 tracking-widest uppercase mb-2">Keputusan</p>
+        <h4 class="font-serif-elegant text-xl text-blue-900 mb-2">Melangkah ke Pelaminan</h4>
+        <p class="text-sm text-slate-600 leading-relaxed italic">Dengan restu orang tua dan keyakinan hati, kami memutuskan untuk menyatukan dua jiwa dalam ikatan suci pernikahan. Semoga Allah SWT meridhoi setiap langkah kami.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+
+   <!-- ============ GALLERY ============ -->
+   <section class="relative w-full py-20 px-6 section-bg overflow-hidden">
+    <div class="max-w-5xl mx-auto">
+     <div class="reveal text-center mb-12">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Moments</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Our Gallery</h2>
+      <div class="elegant-divider w-32 mx-auto"><i data-lucide="camera" class="w-4 h-4 text-blue-400"></i>
+      </div>
+     </div><!-- Slider -->
+     <div class="reveal reveal-delay-1 mb-10">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-blue-50" style="aspect-ratio: 16/10;">
+       <div id="slider-track" class="flex h-full slider-track"><!-- Populated by JS -->
+       </div><button id="slide-prev" class="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur hover:bg-white shadow-lg flex items-center justify-center transition"> <i data-lucide="chevron-left" class="w-5 h-5 text-blue-700"></i> </button> <button id="slide-next" class="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur hover:bg-white shadow-lg flex items-center justify-center transition"> <i data-lucide="chevron-right" class="w-5 h-5 text-blue-700"></i> </button>
+       <div id="slider-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2"></div>
+      </div>
+     </div><!-- Grid -->
+     <div class="reveal reveal-delay-2 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4" id="gallery-grid"><!-- Populated by JS -->
+     </div>
+    </div>
+   </section>
+   
+   <!-- ============ RSVP & GUESTBOOK ============ -->
+   <section class="relative w-full py-20 px-6 overflow-hidden" style="background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);">
+    <div class="max-w-2xl mx-auto">
+     <div class="reveal text-center mb-10">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Your Presence</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">RSVP &amp; Wishes</h2>
+      <div class="elegant-divider w-32 mx-auto"><i data-lucide="message-circle-heart" class="w-4 h-4 text-blue-400"></i>
+      </div>
+     </div><!-- Form -->
+     <div class="reveal reveal-delay-1 bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-50">
+      <form id="rsvp-form" class="space-y-4">
+       <div><label for="rsvp-name" class="block text-xs tracking-widest uppercase text-slate-600 mb-2">Nama Anda</label> <input id="rsvp-name" type="text" required class="w-full px-4 py-3 rounded-xl bg-blue-50/50 border border-blue-100 focus:border-blue-500 focus:outline-none text-sm transition" placeholder="Nama lengkap">
+       </div>
+       <div><label for="rsvp-attend" class="block text-xs tracking-widest uppercase text-slate-600 mb-2">Kehadiran</label> <select id="rsvp-attend" required class="w-full px-4 py-3 rounded-xl bg-blue-50/50 border border-blue-100 focus:border-blue-500 focus:outline-none text-sm transition"> <option value="">— Pilih —</option> <option value="Hadir">Insya Allah Hadir</option> <option value="Tidak Hadir">Mohon Maaf Tidak Hadir</option> <option value="Masih Ragu">Masih Ragu</option> </select>
+       </div>
+       <div><label for="rsvp-message" class="block text-xs tracking-widest uppercase text-slate-600 mb-2">Ucapan &amp; Doa</label> <textarea id="rsvp-message" required rows="3" class="w-full px-4 py-3 rounded-xl bg-blue-50/50 border border-blue-100 focus:border-blue-500 focus:outline-none text-sm transition resize-none" placeholder="Tuliskan ucapan dan doa terbaik Anda..."></textarea>
+       </div><button type="submit" id="submit-rsvp" class="btn-elegant w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm tracking-widest uppercase shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"> <i data-lucide="send" class="w-4 h-4"></i> <span>Kirim Ucapan</span> </button>
+       <p id="rsvp-feedback" class="text-center text-sm hidden"></p>
+      </form>
+     </div><!-- Messages list -->
+     <div class="reveal reveal-delay-2 mt-10">
+      <div class="flex items-center justify-between mb-4">
+       <h3 class="font-serif-elegant text-xl text-blue-900">Ucapan &amp; Doa</h3><span id="msg-count" class="text-xs text-slate-500 bg-white px-3 py-1 rounded-full border border-blue-100">0 ucapan</span>
+      </div>
+      <div id="messages-list" class="space-y-3 max-h-96 overflow-y-auto pr-2">
+       <p class="text-center text-sm text-slate-400 italic py-8" id="empty-msg">Belum ada ucapan. Jadilah yang pertama! 💙</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- ============ LOVE GIFT ============ -->
+   <section class="relative w-full py-20 px-6 section-bg overflow-hidden">
+    <div class="max-w-xl mx-auto text-center">
+     <div class="reveal">
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Wedding Gift</p>
+      <h2 class="font-script text-5xl md:text-6xl text-blue-900 mb-4">Love Gift</h2>
+      <div class="elegant-divider w-32 mx-auto mb-6"><i data-lucide="gift" class="w-4 h-4 text-blue-400"></i>
+      </div>
+      <p class="text-sm text-slate-600 leading-relaxed mb-8 px-4 italic">Doa restu Anda adalah hadiah terindah. Namun jika berkenan memberikan tanda kasih, dapat melalui rekening berikut.</p>
+     </div>
+     <div class="reveal reveal-delay-1"><button id="gift-toggle" class="btn-elegant inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm tracking-widest uppercase shadow-lg hover:shadow-xl transition-all"> <i data-lucide="gift" class="w-4 h-4"></i> Buka Love Gift </button>
+     </div>
+     <div id="gift-cards" class="hidden mt-8 space-y-4"><!-- BRI -->
+      <div class="bg-gradient-to-br from-blue-600 to-blue-900 rounded-2xl p-6 text-white shadow-2xl text-left relative overflow-hidden">
+       <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10"></div>
+       <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/5"></div>
+       <div class="relative">
+        <div class="flex items-center justify-between mb-4"><span class="font-bold text-lg tracking-wider">BRI</span> <i data-lucide="credit-card" class="w-6 h-6 opacity-80"></i>
+        </div>
+        <p class="text-xs opacity-70 uppercase tracking-widest mb-1">Atas Nama</p>
+        <p class="font-serif-elegant text-xl mb-4">Eli Anisa</p>
+        <p class="text-xs opacity-70 uppercase tracking-widest mb-1">Nomor Rekening</p>
+        <div class="flex items-center justify-between gap-3">
+         <p id="rek-bri" class="font-mono text-lg tracking-wider">— — — —</p><button onclick="copyRek('rek-bri','BRI')" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-full text-xs backdrop-blur transition"> <i data-lucide="copy" class="w-3 h-3 inline mr-1"></i>Salin </button>
+        </div>
+        <p class="text-[10px] opacity-60 mt-2 italic">*Silakan hubungi via WhatsApp untuk no. rekening BRI</p>
+       </div>
+      </div><!-- BCA -->
+      <div class="bg-gradient-to-br from-slate-700 to-blue-900 rounded-2xl p-6 text-white shadow-2xl text-left relative overflow-hidden">
+       <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10"></div>
+       <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/5"></div>
+       <div class="relative">
+        <div class="flex items-center justify-between mb-4"><span class="font-bold text-lg tracking-wider">BCA</span> <i data-lucide="credit-card" class="w-6 h-6 opacity-80"></i>
+        </div>
+        <p class="text-xs opacity-70 uppercase tracking-widest mb-1">Atas Nama</p>
+        <p class="font-serif-elegant text-xl mb-4">Eli Anisa</p>
+        <p class="text-xs opacity-70 uppercase tracking-widest mb-1">Nomor Rekening</p>
+        <div class="flex items-center justify-between gap-3">
+         <p id="rek-bca" class="font-mono text-lg tracking-wider">2040591772</p><button onclick="copyRek('rek-bca','BCA')" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-full text-xs backdrop-blur transition"> <i data-lucide="copy" class="w-3 h-3 inline mr-1"></i>Salin </button>
+        </div>
+       </div>
+      </div>
+      <p id="copy-rek-feedback" class="text-xs text-green-600 hidden">✓ Nomor rekening berhasil disalin!</p>
+     </div>
+    </div>
+   </section><!-- ============ CLOSING ============ -->
+   <section class="relative w-full py-20 px-6 overflow-hidden" style="background: linear-gradient(180deg, #ffffff 0%, #dbeafe 100%);"><!-- Decorative -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-40 opacity-40">
+     <svg viewbox="0 0 100 30"><path d="M10 15 Q30 5, 50 15 T90 15" stroke="#60a5fa" stroke-width="0.5" fill="none" /> <circle cx="50" cy="15" r="3" fill="#93c5fd" />
+     </svg>
+    </div>
+    <div class="max-w-xl mx-auto text-center">
+     <div class="reveal">
+      <p class="font-serif-elegant italic text-slate-600 text-base md:text-lg leading-relaxed mb-8 px-4">"Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai."</p>
+      <div class="elegant-divider w-32 mx-auto mb-6"><i data-lucide="heart" class="w-4 h-4 text-blue-400" style="fill: currentColor;"></i>
+      </div>
+      <p class="text-xs tracking-[0.4em] text-blue-500 uppercase mb-3">Wassalamualaikum Wr. Wb.</p>
+      <p class="text-sm text-slate-600 mb-6">Kami yang berbahagia,</p>
+      <h3 class="font-script text-5xl md:text-7xl text-blue-900 leading-tight mb-2">Maskuri</h3>
+      <p class="font-serif-elegant italic text-xl text-blue-400 my-1">&amp;</p>
+      <h3 class="font-script text-5xl md:text-7xl text-blue-900 leading-tight mb-8">Eli Anisa</h3><!-- WhatsApp CTA --> <a href="https://wa.me/6283892429700?text=Halo%2C%20saya%20ingin%20konfirmasi%20kehadiran%20untuk%20pernikahan%20Maskuri%20%26%20Eli%20Anisa" target="_blank" rel="noopener noreferrer" class="btn-elegant inline-flex items-center gap-2 px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full text-sm tracking-widest uppercase shadow-lg transition-all"> <i data-lucide="message-circle" class="w-4 h-4"></i> Konfirmasi via WhatsApp </a>
+     </div>
+     <div class="reveal reveal-delay-2 mt-16 pt-8 border-t border-blue-200">
+      <p class="text-xs text-slate-500">Made with</p><i data-lucide="heart" class="w-4 h-4 text-blue-500 mx-auto my-1" style="fill: currentColor;"></i>
+      <p class="text-xs text-slate-500">for Maskuri &amp; Eli Anisa</p>
+     </div>
+    </div>
+   </section>
+  </div><!-- Toast -->
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-[200] hidden">
+   <div class="bg-blue-900 text-white px-6 py-3 rounded-full shadow-2xl text-sm flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-300"></i> <span id="toast-msg">Berhasil!</span>
+   </div>
+  </div>
+  <script>
+  // ============ INIT ============
+  lucide.createIcons();
+
+  // ============ GUEST NAME FROM URL ============
+  function getGuestFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get('to') || params.get('guest');
+    return guest ? decodeURIComponent(guest.replace(/\+/g, ' ')) : null;
+  }
+
+  const initialGuest = getGuestFromURL();
+  if (initialGuest) {
+    document.getElementById('guest-display').textContent = initialGuest;
+  }
+
+  // Guest name generator panel
+  document.getElementById('toggle-generator').addEventListener('click', () => {
+    document.getElementById('generator-panel').classList.toggle('hidden');
+  });
+
+  document.getElementById('apply-guest').addEventListener('click', () => {
+    const name = document.getElementById('guest-input').value.trim();
+    if (name) {
+      document.getElementById('guest-display').textContent = name;
+      showToast('Nama tamu diterapkan!');
+    }
+  });
+
+  document.getElementById('copy-link').addEventListener('click', async () => {
+    const name = document.getElementById('guest-input').value.trim() || 'Tamu Undangan';
+    const url = `${window.location.origin}${window.location.pathname}?to=${encodeURIComponent(name)}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      const fb = document.getElementById('copy-feedback');
+      fb.classList.remove('hidden');
+      setTimeout(() => fb.classList.add('hidden'), 2500);
+    } catch(e) {
+      showToast('Salin manual: ' + url);
+    }
+  });
+
+  // ============ COVER OPEN ============
+  document.getElementById('open-btn').addEventListener('click', () => {
+    document.getElementById('cover').classList.add('hidden-cover');
+    document.getElementById('main-content').classList.add('visible');
+    setTimeout(() => {
+      document.getElementById('cover').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 1200);
+    // Try to play music
+    const music = document.getElementById('bg-music');
+    music.play().catch(() => {});
+    initReveals();
+  });
+
+  // Lock scroll initially
+  document.body.style.overflow = 'hidden';
+
+  // ============ PETALS ============
+  function createPetals() {
+    const container = document.getElementById('petals-container');
+    const colors = ['#bfdbfe', '#93c5fd', '#dbeafe', '#60a5fa'];
+    for (let i = 0; i < 15; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      const size = 6 + Math.random() * 10;
+      petal.style.left = Math.random() * 100 + '%';
+      petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+      petal.style.animationDelay = Math.random() * 8 + 's';
+      petal.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="${colors[i % colors.length]}" opacity="0.6"/></svg>`;
+      container.appendChild(petal);
+    }
+  }
+  createPetals();
+
+  // ============ REVEAL ANIMATION ============
+  function initReveals() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
+
+  // ============ COUNTDOWN ============
+  const weddingDate = new Date('2026-06-06T09:00:00+07:00').getTime();
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = weddingDate - now;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const secs = Math.floor((diff % (1000*60)) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ============ SAVE THE DATE (Google Calendar) ============
+  document.getElementById('save-date-btn').addEventListener('click', () => {
+    const start = '20260606T020000Z'; // 09:00 WIB = 02:00 UTC
+    const end = '20260606T070000Z';
+    const title = encodeURIComponent('Pernikahan Maskuri & Eli Anisa');
+    const details = encodeURIComponent('Akad Nikah 09:00 WIB, Resepsi 11:00 WIB. Semoga berkenan hadir.');
+    const location = encodeURIComponent('Lihat lokasi: https://maps.app.goo.gl/cituMK7xqCXnwRmq9');
+    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    showToast('Membuka Google Calendar...');
+  });
+
+  // ============ GALLERY ============
+  const galleryImages = [
+    '/img/3.jpg',
+    '/img/4.jpg',
+    '/img/5.jpg',
+    '/img/6.jpg',
+    '/img/7.jpg',
+    '/img/8.jpg',
+    '/img/9.jpg',
+    '/img/1.jpg',
+    '/img/2.jpg'
+    
+  ];
+
+  // Slider
+  const sliderTrack = document.getElementById('slider-track');
+  const dotsContainer = document.getElementById('slider-dots');
+  galleryImages.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'flex-shrink-0 w-full h-full';
+    slide.innerHTML = `<img src="${src}" alt="Gallery ${i+1}" class="slider-img" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#dbeafe,#93c5fd)'; this.alt='Image';">`;
+    sliderTrack.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'w-2 h-2 rounded-full bg-white/60 hover:bg-white transition';
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  let currentSlide = 0;
+  function goToSlide(idx) {
+    currentSlide = (idx + galleryImages.length) % galleryImages.length;
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    [...dotsContainer.children].forEach((d,i) => {
+      d.className = i === currentSlide
+        ? 'w-8 h-2 rounded-full bg-white transition-all'
+        : 'w-2 h-2 rounded-full bg-white/60 hover:bg-white transition';
+    });
+  }
+  goToSlide(0);
+
+  document.getElementById('slide-next').addEventListener('click', () => goToSlide(currentSlide + 1));
+  document.getElementById('slide-prev').addEventListener('click', () => goToSlide(currentSlide - 1));
+  setInterval(() => goToSlide(currentSlide + 1), 5000);
+
+  // Grid
+  const grid = document.getElementById('gallery-grid');
+  galleryImages.forEach((src, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item rounded-2xl overflow-hidden shadow-md aspect-square';
+    item.innerHTML = `<img src="${src}" alt="Foto ${i+1}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#dbeafe,#93c5fd)';">`;
+    item.addEventListener('click', () => {
+      goToSlide(i);
+      document.getElementById('slider-track').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+    grid.appendChild(item);
+  });
+
+  // ============ MUSIC TOGGLE ============
+  const music = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-toggle');
+  let musicPlaying = false;
+  musicBtn.addEventListener('click', () => {
+    if (musicPlaying) {
+      music.pause();
+      musicBtn.innerHTML = '<i data-lucide="music" class="w-5 h-5 text-blue-700"></i>';
+    } else {
+      music.play().catch(()=>{});
+      musicBtn.innerHTML = '<i data-lucide="pause" class="w-5 h-5 text-blue-700"></i>';
+    }
+    musicPlaying = !musicPlaying;
+    lucide.createIcons();
+  });
+
+  // ============ GIFT ============
+  document.getElementById('gift-toggle').addEventListener('click', () => {
+    const cards = document.getElementById('gift-cards');
+    cards.classList.toggle('hidden');
+    lucide.createIcons();
+  });
+
+  function copyRek(id, bank) {
+    const text = document.getElementById(id).textContent.replace(/\s/g,'');
+    navigator.clipboard.writeText(text).then(() => {
+      const fb = document.getElementById('copy-rek-feedback');
+      fb.textContent = `✓ No. rekening ${bank} berhasil disalin!`;
+      fb.classList.remove('hidden');
+      setTimeout(() => fb.classList.add('hidden'), 2500);
+    });
+  }
+  window.copyRek = copyRek;
+
+  // ============ TOAST ============
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    toast.classList.remove('hidden');
+    setTimeout(() => toast.classList.add('hidden'), 2500);
+  }
+
+  // ============ DATA SDK - GUESTBOOK ============
+  let allMessages = [];
+
+  const dataHandler = {
+    onDataChanged(data) {
+      allMessages = data || [];
+      renderMessages();
+    }
+  };
+
+  function renderMessages() {
+    const list = document.getElementById('messages-list');
+    const empty = document.getElementById('empty-msg');
+    const count = document.getElementById('msg-count');
+
+    count.textContent = `${allMessages.length} ucapan`;
+
+    if (allMessages.length === 0) {
+      empty.classList.remove('hidden');
+      // Remove all non-empty elements
+      [...list.children].forEach(c => {
+        if (c.id !== 'empty-msg') c.remove();
+      });
+      return;
+    }
+
+    empty.classList.add('hidden');
+
+    const sorted = [...allMessages].sort((a,b) => {
+      const da = new Date(a.createdAt || 0).getTime();
+      const db = new Date(b.createdAt || 0).getTime();
+      return db - da;
+    });
+
+    const existing = new Map();
+    [...list.children].forEach(el => {
+      if (el.dataset && el.dataset.bid) existing.set(el.dataset.bid, el);
+    });
+
+    // Rebuild minimally
+    list.innerHTML = '';
+    sorted.forEach(msg => {
+      const el = document.createElement('div');
+      el.dataset.bid = msg.__backendId;
+      el.className = 'bg-white rounded-2xl p-4 shadow-sm border border-blue-50 animate-[fadeIn_0.5s_ease]';
+      const date = new Date(msg.createdAt || Date.now());
+      const dateStr = date.toLocaleDateString('id-ID', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+      const statusColor = msg.attendance === 'Hadir' ? 'bg-green-100 text-green-700'
+                        : msg.attendance === 'Tidak Hadir' ? 'bg-red-100 text-red-700'
+                        : 'bg-yellow-100 text-yellow-700';
+      el.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white font-serif-elegant text-lg">
+            ${escapeHTML(msg.name.charAt(0).toUpperCase())}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <h4 class="font-serif-elegant text-blue-900 font-medium truncate">${escapeHTML(msg.name)}</h4>
+              <span class="text-[10px] px-2 py-0.5 rounded-full ${statusColor}">${escapeHTML(msg.attendance)}</span>
+            </div>
+            <p class="text-sm text-slate-600 mt-1 leading-relaxed">${escapeHTML(msg.message)}</p>
+            <p class="text-[10px] text-slate-400 mt-2">${dateStr}</p>
+          </div>
+        </div>
+      `;
+      list.appendChild(el);
+    });
+  }
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  }
+
+  // RSVP form
+  document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-rsvp');
+    const feedback = document.getElementById('rsvp-feedback');
+
+    const name = document.getElementById('rsvp-name').value.trim();
+    const attendance = document.getElementById('rsvp-attend').value;
+    const message = document.getElementById('rsvp-message').value.trim();
+
+    if (!name || !attendance || !message) return;
+
+    if (allMessages.length >= 999) {
+      feedback.textContent = '⚠ Buku tamu sudah penuh (maks 999 ucapan).';
+      feedback.className = 'text-center text-sm text-red-600';
+      feedback.classList.remove('hidden');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner"></div><span>Mengirim...</span>';
+
+    const result = await window.dataSdk.create({
+      name: name,
+      attendance: attendance,
+      message: message,
+      createdAt: new Date().toISOString()
+    });
+
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i><span>Kirim Ucapan</span>';
+    lucide.createIcons();
+
+    if (result.isOk) {
+      e.target.reset();
+      feedback.textContent = '✓ Terima kasih atas ucapan & doanya!';
+      feedback.className = 'text-center text-sm text-green-600';
+      feedback.classList.remove('hidden');
+      setTimeout(() => feedback.classList.add('hidden'), 3500);
+    } else {
+      feedback.textContent = '✗ Gagal mengirim. Coba lagi.';
+      feedback.className = 'text-center text-sm text-red-600';
+      feedback.classList.remove('hidden');
+    }
+  });
+
+  // ============ INITIALIZE SDKS ============
+  (async () => {
+    if (window.dataSdk) {
+      await window.dataSdk.init(dataHandler);
+    }
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: {},
+        onConfigChange: async () => {},
+        mapToCapabilities: () => ({ recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined }),
+        mapToEditPanelValues: () => new Map()
+      });
+    }
+  })();
+
+  // Initial reveal for elements above the fold (after opening)
+  // Reveals will be initialized when cover is opened
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f67efbe134afce8',t:'MTc3NzkwMjIyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
